@@ -64,35 +64,41 @@ def prepare_clips(product_id: str, version: str = "v1") -> list[Path]:
             out_clips.append(out_clip)
         return out_clips
 
-    print(f"[3/5 Clipes] Baixando imagens do produto #{product_id} e gerando 4 cenas dinâmicas 1080x1920...")
+    print(f"[3/5 Clipes] Baixando imagens do produto #{product_id} e gerando cenas dinâmicas (1.8s, fundo desfocado + produto centralizado)...")
     urls = list(dict.fromkeys([product["image_url"]] + product.get("gallery_urls", [])))
-    while len(urls) < 4:
-        urls.append(urls[len(urls) % len(urls)])
+    # Garante pelo menos 6 a 8 variações
+    while len(urls) < 8:
+        urls.extend(urls[:min(len(urls), 8 - len(urls))])
 
     out_clips = []
-    for idx, url in enumerate(urls[:4], start=1):
+    SCENE_DURATION = 1.8  # Segundos por cena (ritmo dinâmico de 1.5 a 2s)
+
+    for idx, url in enumerate(urls[:8], start=1):
         img_path = clips_dir / f"img_{idx:02d}.jpg"
         ok = download_image(url, img_path)
         out_clip = clips_dir / f"scene_{idx:02d}.mp4"
 
         if ok:
-            zoom_expr = "min(zoom+0.0018,1.22)" if idx % 2 == 1 else "if(eq(on,1),1.22,max(1.0,zoom-0.0018))"
+            # Fundo desfocado 1080x1920 + Produto nítido centralizado com leve movimento
+            zoom_in = idx % 2 == 1
+            z_expr = "min(zoom+0.0012,1.08)" if zoom_in else "if(eq(on,1),1.08,max(1.0,zoom-0.0012))"
             vf = (
-                "scale=1400:2488:force_original_aspect_ratio=increase,"
-                "crop=1400:2488,"
-                f"zoompan=z='{zoom_expr}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=150:s=1080x1920:fps=30,"
-                "eq=contrast=1.06:saturation=1.10:brightness=-0.03,"
-                "format=yuv420p"
+                f"[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
+                f"boxblur=22:5,eq=brightness=-0.12:contrast=1.05[bg];"
+                f"[0:v]scale=920:1280:force_original_aspect_ratio=decrease,"
+                f"zoompan=z='{z_expr}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=54:s=920x1280:fps=30,"
+                f"format=yuva420p[fg];"
+                f"[bg][fg]overlay=(W-w)/2:(H-h)/2:format=auto,format=yuv420p"
             )
             cmd = [
                 "ffmpeg", "-y", "-loop", "1", "-i", str(img_path),
-                "-t", "5", "-an", "-vf", vf,
-                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "23",
+                "-t", f"{SCENE_DURATION:.1f}", "-an", "-filter_complex", vf,
+                "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-r", "30",
                 str(out_clip),
             ]
         else:
             cmd = [
-                "ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=#111827:s=1080x1920:r=30:d=5",
+                "ffmpeg", "-y", "-f", "lavfi", "-i", f"color=c=#111827:s=1080x1920:r=30:d={SCENE_DURATION:.1f}",
                 "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
                 str(out_clip),
             ]

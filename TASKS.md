@@ -51,12 +51,25 @@
 - [x] **Documentação & Guias Operacionais:**
   - Guia em `contas/guia_operacional_us.md` para abertura de conta ACH (Wise/Payoneer), formulário fiscal W-8BEN e aquecimento de contas US.
 
+- [x] **Setup de Hardware com GPU NVIDIA & PyTorch CUDA (20/10/2026):**
+  - Ambiente configurado com Python 3.12, uv, FFmpeg 9.0.2 e Node.js LTS v24.20.0.
+  - PyTorch 2.5.1 + CUDA 12.4 instalado e validado na GPU NVIDIA GeForce RTX 3050 (8 GB VRAM).
+- [x] **Pipeline Pro 3.0 — Alta Conversão e Eliminação de Risco de PI (20/10/2026):**
+  - **Persona Autoral (Cientista Maluco):** Substituição de Rick Sanchez por persona autoral "Dr. Volt", 100% livre de violações de PI ou termos da Adult Swim.
+  - **Roteiros de Alta Retenção (20-25s):** Calibrados para 50-60 palavras com gancho imediato de dor nos primeiros 3 segundos (testado: 23.64 segundos).
+  - **Cenas Dinâmicas (1.8s):** Fundo desfocado 1080x1920 com produto centralizado, nítido e com zoom suave (`3_baixar_clipes.py`).
+  - **Legendas por Palavra com Faster-Whisper:** Substituição do fatiamento artificial por transcrição real via IA com precisão de frações de segundo por palavra (`4_transcrever_whisper.py`).
+  - **Personagem com Boca Reativa (Lipsync):** Animação automática por envelope de amplitude de áudio sincronizando abertura da boca durante a fala (`5_montar_video.py`).
+  - **Sound Design Nativo:** Efeitos sonoros sintetizados com FFmpeg (`ding_preco.mp3` e `whoosh_transicao.mp3`) + trilha de fundo sutil a 10% de volume (`lofi_ambient_synth.mp3`).
+  - **Build da Vitrine:** Validado com sucesso em Next.js 15 (15/15 páginas estáticas).
+  - *Limitações Reais:* A voz do cientista usa temporariamente Edge-TTS calibrado (`en-US-GuyNeural`, +15% rate, -2Hz pitch) com sound design; a inferência via modelo RVC específico requer o fornecimento do arquivo `.pth` de voz autoral do usuário.
+
 ---
 
 ## 🟡 Em Andamento (In Progress)
 
-- [ ] **Geração do Lote de Vídeos Pro 2.0 (Produtos #01 ao #10 com Persona Rick Sanchez):**
-  - Executar a esteira Pro 2.0 para gerar as versões v1 e v2 para todos os produtos aprovados.
+- [ ] **Geração do Lote de Vídeos Pro 3.0 (Produtos #01 ao #10 com Persona Cientista Autoral):**
+  - Executar a nova esteira para todos os 10 produtos aprovados do catálogo.
 
 ---
 

@@ -18,7 +18,7 @@ CONFIG_PRODUTOS = BASE_DIR.parent / "vitrine" / "src" / "data" / "produtos.json"
 WORK_DIR = BASE_DIR / "output" / "work"
 
 
-def build_rick_scripts(product: dict) -> list[dict]:
+def build_scientist_scripts(product: dict) -> list[dict]:
     code = product["code"]
     short = product["short_title"]
     price = round(float(product["price"]))
@@ -26,67 +26,68 @@ def build_rick_scripts(product: dict) -> list[dict]:
     solution = product["solution_summary"]
     benefits = product.get("benefits", [])
     b1 = benefits[0] if len(benefits) > 0 else solution
-    b2 = benefits[1] if len(benefits) > 1 else "Over a hundred thousand five-star reviews on Amazon."
 
     return [
         {
             "version": "v1",
-            "template": "rick_dimension_c137_pas",
-            "persona": "rick",
-            "top_banner": f"DIMENSION C-137 FIND {code} 🧪",
-            "hook": f"Listen to me Morty, and listen close you primitive earthlings on TikTok.",
+            "template": "cynical_scientist_hook_first",
+            "persona": "scientist",
+            "top_banner": f"LAB FIND {code} ⚡",
+            "hook": f"Are you seriously still {pain}? That is painful to watch.",
             "body": (
-                f"I literally traveled across dimension C-137 just to find you still {pain}! "
-                f"It makes my eyes hurt, Morty! Look at this ${price} {short} on Amazon. "
-                f"{solution} It's not rocket science! {b1}."
+                f"Drop the primitive methods and look at this ${price} {short} on Amazon. "
+                f"{solution} {b1}."
             ),
-            "cta": f"Stop living in the Stone Age! Tap the link in my bio, search code {code}, and get one before I leave this timeline!",
+            "cta": f"Stop wasting hours. Tap my bio, enter code {code}, and fix this today.",
             "scenes_text": [
-                f"STOP {pain.upper()[:26]}...",
-                f"MORTY LOOK: ${price} {short.upper()[:20]}",
-                b1.upper()[:38],
-                f"TAP BIO LINK -> CODE {code} 🛸",
+                f"STILL {pain.upper()[:24]}?",
+                f"${price} {short.upper()[:22]}",
+                b1.upper()[:36],
+                f"CODE {code} IN BIO ⚡",
             ],
         },
         {
             "version": "v2",
-            "template": "rick_interdimensional_roast",
-            "persona": "rick",
-            "top_banner": f"RICK'S LAB APPROVED {code} ⚡",
-            "hook": f"Morty, grab a notepad. Humans are actually suffering from {pain} when Amazon sells this for ${price}.",
+            "template": "lab_experiment_roast",
+            "persona": "scientist",
+            "top_banner": f"MAD SCIENTIST LAB {code} 🧪",
+            "hook": f"Why do humans insist on suffering from {pain} every single week?",
             "body": (
-                f"I tested this {short} because human tools are usually garbage. "
-                f"Turns out? {solution} {b1}. "
-                f"Even Jerry could use this without ruining his life, Morty!"
+                f"I tested this ${price} {short} in the lab. "
+                f"{solution} It does the dirty work in seconds so you do not have to."
             ),
-            "cta": f"I put the portal link in my bio. Go type code {code} and evolve already!",
+            "cta": f"Link is in my bio. Type code {code} before this sells out again.",
             "scenes_text": [
-                f"RICK C-137 TEST: ${price}",
-                short.upper()[:30],
-                b2.upper()[:38],
-                f"PORTAL LINK IN BIO ({code}) 🔗",
+                f"TIRED OF {pain.upper()[:22]}?",
+                f"LAB TESTED: ${price}",
+                f"{short.upper()[:26]}",
+                f"SEARCH CODE {code} IN BIO 🔗",
             ],
         },
         {
             "version": "v3",
-            "template": "rick_genius_verdict",
-            "persona": "rick",
-            "top_banner": f"SMARTEST BUY ON AMAZON {code} 🧬",
-            "hook": f"I'm Rick Sanchez, the smartest man in the multiverse, and your daily routine is pathetic.",
+            "template": "genius_efficiency_verdict",
+            "persona": "scientist",
+            "top_banner": f"EFFICIENCY HACK {code} 🧬",
+            "hook": f"Stop {pain} the hard way when Amazon has an instant fix.",
             "body": (
-                f"Why are you wasting your short mortal life {pain}? "
-                f"Get this ${price} {short} on Prime. {solution} "
-                f"It pays for itself on day one. Stop being stubborn and grab it."
+                f"This ${price} {short} completely solves it. "
+                f"{solution} {b1}. It literally pays for itself immediately."
             ),
-            "cta": f"Link is in my bio, code {code}. Now stop bugging me and go get it!",
+            "cta": f"Upgrade your routine. Hit the link in my bio and use code {code}.",
             "scenes_text": [
-                f"SMARTEST AMAZON FIND {code}",
-                f"${price} ON PRIME // NO MORE EXCUSES",
-                b1.upper()[:38],
-                f"USE CODE {code} IN BIO ⚡",
+                f"STOP {pain.upper()[:22]}",
+                f"${price} AMAZON PRIME FIX",
+                b1.upper()[:36],
+                f"USE CODE {code} IN BIO 🧬",
             ],
         },
     ]
+
+
+def build_rick_scripts(product: dict) -> list[dict]:
+    # Alias retrocompatível que direciona para a persona autoral de cientista sem violar IP
+    return build_scientist_scripts(product)
 
 
 def build_standard_scripts(product: dict) -> list[dict]:
@@ -211,8 +212,8 @@ def generate_for_product(product_id: str, version: str = "v1", persona: str = "r
     p_dir = WORK_DIR / f"produto_{product['id']}_{version}"
     p_dir.mkdir(parents=True, exist_ok=True)
 
-    if persona == "rick":
-        variations = try_claude_api(product, persona="rick") or build_rick_scripts(product)
+    if persona in ("rick", "scientist"):
+        variations = try_claude_api(product, persona=persona) or build_scientist_scripts(product)
     else:
         variations = try_claude_api(product, persona="standard") or build_standard_scripts(product)
 
@@ -237,7 +238,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--id", default="01", help="ID do produto (ex: 01, 02...)")
     parser.add_argument("--version", default="v1", choices=["v1", "v2", "v3"])
-    parser.add_argument("--persona", default="rick", choices=["rick", "standard"], help="Persona do vídeo (rick ou standard)")
+    parser.add_argument("--persona", default="scientist", choices=["scientist", "rick", "standard"], help="Persona do vídeo (scientist, rick ou standard)")
     args = parser.parse_args()
     generate_for_product(args.id, args.version, args.persona)
 

@@ -30,7 +30,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Fábrica de Vídeos Dollar Factory Pro 2.0")
     parser.add_argument("--id", default="01", help="ID do produto (01 a 10)")
     parser.add_argument("--version", default="v1", choices=["v1", "v2", "v3"], help="Versão do roteiro")
-    parser.add_argument("--persona", default="rick", choices=["rick", "standard"], help="Persona do vídeo")
+    parser.add_argument("--persona", default="scientist", choices=["scientist", "rick", "standard"], help="Persona do vídeo")
     args = parser.parse_args()
 
     print(f"\n========================================================")

@@ -1,6 +1,11 @@
 {
   "default": "en-US-AvaMultilingualNeural",
   "personas": {
+    "scientist": {
+      "voice": "en-US-GuyNeural",
+      "rate": "+15%",
+      "pitch": "-2Hz"
+    },
     "rick": {
       "voice": "en-US-GuyNeural",
       "rate": "+14%",
