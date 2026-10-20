@@ -7,7 +7,7 @@
     "short_title": "Electric Spin Scrubber",
     "niche": "Home & Cleaning",
     "price": 35.99,
-    "old_price": 35.99,
+    "old_price": 49.99,
     "rating": 4.3,
     "reviews_count": 13605,
     "amazon_asin": "B0B7RSV894",
@@ -27,7 +27,7 @@
       "https://m.media-amazon.com/images/I/71gTO1nWGSL._SL1500_.jpg",
       "https://m.media-amazon.com/images/I/71WLVU23oIL._SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_01.mp4",
     "badge": "13k+ Reviews"
   },
   {
@@ -38,7 +38,7 @@
     "short_title": "Reusable Pet Hair Roller",
     "niche": "Pet Must-Haves",
     "price": 24.99,
-    "old_price": 24.99,
+    "old_price": 31.95,
     "rating": 4.5,
     "reviews_count": 206022,
     "amazon_asin": "B00BAGTNAQ",
@@ -69,7 +69,7 @@
     "short_title": "Fullstar Veggie Chopper",
     "niche": "Kitchen Hacks",
     "price": 24.99,
-    "old_price": 24.99,
+    "old_price": 39.99,
     "rating": 4.5,
     "reviews_count": 122452,
     "amazon_asin": "B0764HS4SL",
@@ -89,7 +89,7 @@
       "https://m.media-amazon.com/images/I/81BSNGYYQ1L._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/71a3rzA4zzL._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_03.mp4",
     "badge": "122k+ Reviews"
   },
   {
@@ -100,7 +100,7 @@
     "short_title": "Mini Chip Bag Sealer",
     "niche": "Kitchen Hacks",
     "price": 9.99,
-    "old_price": 9.99,
+    "old_price": 12.99,
     "rating": 3.8,
     "reviews_count": 3756,
     "amazon_asin": "B0C2TD5SKJ",
@@ -120,7 +120,7 @@
       "https://m.media-amazon.com/images/I/61lRDS4OUCL._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/71tDsUxeeOL._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_04.mp4",
     "badge": "Under $10"
   },
   {
@@ -131,7 +131,7 @@
     "short_title": "Touchless Soap Dispenser",
     "niche": "Home & Cleaning",
     "price": 27.99,
-    "old_price": 27.99,
+    "old_price": 34.99,
     "rating": 4.3,
     "reviews_count": 39353,
     "amazon_asin": "B078XDFDPY",
@@ -151,7 +151,7 @@
       "https://m.media-amazon.com/images/I/71QqlKdCcLL._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/81-UOJYQw2L._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_05.mp4",
     "badge": "39k+ Reviews"
   },
   {
@@ -182,7 +182,7 @@
       "https://m.media-amazon.com/images/I/71BJRNrj8XL._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/81fFCaYvLAL._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_06.mp4",
     "badge": "100k+ Reviews"
   },
   {
@@ -193,7 +193,7 @@
     "short_title": "Dog Bath Shampoo Brush",
     "niche": "Pet Must-Haves",
     "price": 11.99,
-    "old_price": 11.99,
+    "old_price": 14.99,
     "rating": 4.5,
     "reviews_count": 25146,
     "amazon_asin": "B01FE3IIC4",
@@ -213,7 +213,7 @@
       "https://m.media-amazon.com/images/I/61u9Xs6-89L._SL1000_.jpg",
       "https://m.media-amazon.com/images/I/71CNPYQu93L._SL1000_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_07.mp4",
     "badge": "25k+ Reviews"
   },
   {
@@ -224,7 +224,7 @@
     "short_title": "Cordless Car Vacuum",
     "niche": "Car & Everyday",
     "price": 24.99,
-    "old_price": 24.99,
+    "old_price": 34.99,
     "rating": 4.3,
     "reviews_count": 49218,
     "amazon_asin": "B07KG2X2GZ",
@@ -244,7 +244,7 @@
       "https://m.media-amazon.com/images/I/61fc8NmxXqL._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/61kF7R+orJL._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_08.mp4",
     "badge": "49k+ Reviews"
   },
   {
@@ -275,7 +275,7 @@
       "https://m.media-amazon.com/images/I/71nuk1CnhML._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/81mMWgoei1L._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_09.mp4",
     "badge": "94k+ Reviews"
   },
   {
@@ -306,7 +306,7 @@
       "https://m.media-amazon.com/images/I/71Li2t57i8L._AC_SL1500_.jpg",
       "https://m.media-amazon.com/images/I/71AWQPKOFnL._AC_SL1500_.jpg"
     ],
-    "video_url": null,
+    "video_url": "/videos/produto_10.mp4",
     "badge": "Under $8"
   }
 ]

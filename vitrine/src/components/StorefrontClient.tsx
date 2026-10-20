@@ -2,8 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { Search, Star, Play, Flame, Sparkles, CheckCircle2 } from "lucide-react";
-import OutboundButton from "./OutboundButton";
+import { Search, Star, Play, CheckCircle2, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
 
 export interface Product {
   id: string;
@@ -43,52 +42,49 @@ export default function StorefrontClient({ products }: { products: Product[] }) 
       const matchesNiche = selectedNiche === "All" || p.niche === selectedNiche;
       if (!q) return matchesNiche;
       const codeClean = p.code.toLowerCase().replace(/^#/, "");
-      const matchesQuery =
-        codeClean.includes(q) ||
-        p.id.toLowerCase().includes(q) ||
-        p.short_title.toLowerCase().includes(q) ||
-        p.title.toLowerCase().includes(q) ||
-        p.niche.toLowerCase().includes(q);
-      return matchesNiche && matchesQuery;
+      return (
+        matchesNiche &&
+        (codeClean.includes(q) ||
+          p.id.toLowerCase().includes(q) ||
+          p.short_title.toLowerCase().includes(q) ||
+          p.title.toLowerCase().includes(q) ||
+          p.niche.toLowerCase().includes(q))
+      );
     });
   }, [products, query, selectedNiche]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-8 pb-12">
-      {/* Hero + Code Search */}
-      <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
-          Curated Problem-Solving Finds
+    <div className="max-w-6xl mx-auto px-4 pt-10 pb-16">
+      {/* Editorial Hero */}
+      <div className="text-center max-w-2xl mx-auto mb-10">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold uppercase tracking-wider mb-4">
+          <Sparkles className="w-3.5 h-3.5 text-slate-600" />
+          Field-Tested Curations • Amazon Prime
         </div>
-        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-4">
-          Viral Amazon US Finds{" "}
-          <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-            That Actually Work
-          </span>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4 font-serif">
+          Practical Everyday Finds, <br className="hidden sm:inline" />
+          Independently Tested.
         </h1>
-        <p className="text-slate-400 text-sm sm:text-base mb-6">
-          Saw a gadget in our TikTok, Reels, or Shorts? Type the{" "}
-          <span className="text-amber-400 font-bold">#Code</span> (like{" "}
-          <code className="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">#01</code> or{" "}
-          <code className="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">#02</code>) or
-          search by name below.
+        <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-8">
+          Looking for a tool featured in our video reviews? Enter the video code (e.g.{" "}
+          <span className="font-bold text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">#01</span> or{" "}
+          <span className="font-bold text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">#02</span>) below for direct, verified Amazon links.
         </p>
 
-        {/* Instant Search Input */}
+        {/* Clean Search Input */}
         <div className="relative max-w-xl mx-auto">
           <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by video code (e.g. #01, 02) or product name..."
-            className="w-full pl-12 pr-24 py-4 rounded-2xl bg-slate-900/90 border-2 border-slate-800 focus:border-amber-400 focus:outline-none text-white placeholder-slate-500 text-sm sm:text-base shadow-xl"
+            placeholder="Search by code (#01, #02...) or keyword..."
+            className="w-full pl-12 pr-20 py-3.5 rounded-xl bg-white border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 focus:outline-none text-slate-900 placeholder-slate-400 text-sm sm:text-base shadow-sm transition-all"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600"
             >
               Clear
             </button>
@@ -97,20 +93,20 @@ export default function StorefrontClient({ products }: { products: Product[] }) 
       </div>
 
       {/* Category Pills */}
-      <div className="flex items-center justify-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+      <div className="flex items-center justify-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar">
         {niches.map((niche) => {
           const active = selectedNiche === niche;
           return (
             <button
               key={niche}
               onClick={() => setSelectedNiche(niche)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 active
-                  ? "bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20"
-                  : "bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800"
+                  ? "bg-slate-900 text-white shadow-sm"
+                  : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200"
               }`}
             >
-              {niche === "All" ? "🔥 All Viral Finds" : niche}
+              {niche === "All" ? "All Recommendations" : niche}
             </button>
           );
         })}
@@ -118,116 +114,124 @@ export default function StorefrontClient({ products }: { products: Product[] }) 
 
       {/* Product Grid */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/40 rounded-3xl border border-slate-800">
-          <p className="text-lg font-bold text-slate-300 mb-2">
-            No gadget found for &ldquo;{query}&rdquo;
+        <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 p-8 max-w-md mx-auto">
+          <p className="text-base font-bold text-slate-800 mb-1">
+            No recommendation found for &ldquo;{query}&rdquo;
           </p>
-          <p className="text-sm text-slate-500 mb-4">
-            Try searching a code from #01 to #10 or clearing your filters.
+          <p className="text-xs text-slate-500 mb-5">
+            Please search for a code between #01 and #10, or browse categories.
           </p>
           <button
             onClick={() => {
               setQuery("");
               setSelectedNiche("All");
             }}
-            className="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm"
+            className="px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold text-xs"
           >
-            Show All Finds
+            Reset Filters
           </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((item) => {
-            const discountPct = Math.round(
-              ((item.old_price - item.price) / item.old_price) * 100
-            );
+            const hasRealDiscount = item.old_price > item.price;
+            const discountPct = hasRealDiscount
+              ? Math.round(((item.old_price - item.price) / item.old_price) * 100)
+              : 0;
+
             return (
               <div
                 key={item.id}
-                className="group rounded-3xl bg-slate-900/70 border border-slate-800/90 hover:border-amber-500/50 overflow-hidden flex flex-col transition-all duration-200 hover:shadow-2xl hover:shadow-amber-500/5"
+                className="group rounded-2xl bg-white border border-slate-200 hover:border-slate-400 overflow-hidden flex flex-col transition-all duration-200 shadow-sm hover:shadow-md"
               >
-                {/* Image / Video Preview Header */}
-                <Link href={`/p/${item.id}`} className="relative aspect-[4/3] bg-slate-950 overflow-hidden block">
+                {/* Image Section */}
+                <Link
+                  href={`/p/${item.id}`}
+                  className="relative aspect-square bg-white p-6 overflow-hidden flex items-center justify-center border-b border-slate-100"
+                >
                   <img
                     src={item.image_url}
                     alt={item.short_title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
 
-                  {/* Code Badge */}
+                  {/* Code Tag Top-Left */}
                   <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-xl bg-amber-400 text-slate-950 font-black text-sm shadow-md">
+                    <span className="px-2.5 py-1 rounded-md bg-slate-900 text-white font-mono font-bold text-xs tracking-wider">
                       {item.code}
                     </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-slate-950/80 backdrop-blur-md text-white text-xs font-bold border border-slate-700">
-                      {item.badge}
+                    <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-600 border border-slate-200">
+                      {item.niche}
                     </span>
                   </div>
 
-                  {/* Discount Badge */}
-                  {discountPct > 0 && (
-                    <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-rose-500 text-white font-extrabold text-xs">
-                      -{discountPct}% OFF
+                  {/* Verified Discount Badge (Only if real discount exists) */}
+                  {hasRealDiscount && discountPct > 0 && (
+                    <span className="absolute top-3 right-3 px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                      Save {discountPct}%
                     </span>
                   )}
 
-                  {/* Watch Demo Pill if video exists */}
+                  {/* Video demo pill */}
                   {item.video_url && (
-                    <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/85 text-amber-400 text-xs font-bold border border-amber-400/30">
-                      <Play className="w-3.5 h-3.5 fill-amber-400" />
-                      Watch Video Demo
+                    <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-sm text-white text-[11px] font-medium">
+                      <Play className="w-3 h-3 fill-white" />
+                      Video Demo
                     </div>
                   )}
-
-                  {/* Price on Image Bottom-Left */}
-                  <div className="absolute bottom-3 left-3 flex items-baseline gap-2">
-                    <span className="text-2xl font-black text-white">
-                      ${item.price.toFixed(2)}
-                    </span>
-                    <span className="text-xs text-slate-400 line-through">
-                      ${item.old_price.toFixed(2)}
-                    </span>
-                  </div>
                 </Link>
 
                 {/* Card Body */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <div className="flex items-center justify-between text-xs text-slate-400 mb-1.5">
-                      <span className="font-semibold text-amber-400/90">{item.niche}</span>
-                      <span className="inline-flex items-center gap-1 text-amber-300 font-bold">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        {item.rating} ({item.reviews_count.toLocaleString()})
-                      </span>
+                    {/* Ratings */}
+                    <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2">
+                      <div className="flex items-center text-amber-500 font-bold">
+                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 mr-1" />
+                        <span>{item.rating.toFixed(1)}</span>
+                      </div>
+                      <span>•</span>
+                      <span>{item.reviews_count.toLocaleString()}+ reviews</span>
                     </div>
 
+                    {/* Title */}
                     <Link href={`/p/${item.id}`}>
-                      <h2 className="text-lg font-extrabold text-white group-hover:text-amber-400 transition-colors line-clamp-2 mb-2">
-                        {item.short_title} — {item.title}
+                      <h2 className="font-bold text-slate-900 text-base leading-snug group-hover:text-slate-600 transition-colors line-clamp-2">
+                        {item.title}
                       </h2>
                     </Link>
 
-                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                    {/* Problem Solved Summary */}
+                    <p className="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
                       {item.solution_summary}
                     </p>
                   </div>
 
-                  <div className="space-y-2.5 pt-2">
-                    <OutboundButton
-                      productId={item.id}
-                      code={item.code}
-                      title={item.short_title}
-                      amazonUrl={item.amazon_url}
-                      price={item.price}
-                      label={`View ${item.code} on Amazon ($${item.price})`}
-                    />
+                  {/* Pricing and Action */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xl font-bold text-slate-900">
+                          ${item.price.toFixed(2)}
+                        </span>
+                        {/* Only strikethrough if old_price > price */}
+                        {hasRealDiscount && (
+                          <span className="text-xs text-slate-400 line-through">
+                            ${item.old_price.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1 mt-0.5">
+                        <CheckCircle2 className="w-3 h-3" /> Prime Eligible
+                      </span>
+                    </div>
+
                     <Link
                       href={`/p/${item.id}`}
-                      className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 font-semibold text-xs transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors"
                     >
-                      <Flame className="w-3.5 h-3.5 text-amber-400" />
-                      See Full Review & Video Demo
+                      <span>Review</span>
+                      <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
                 </div>
@@ -236,6 +240,31 @@ export default function StorefrontClient({ products }: { products: Product[] }) 
           })}
         </div>
       )}
+
+      {/* Trust Badges Banner at Bottom */}
+      <div className="mt-16 p-6 rounded-2xl bg-white border border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center sm:text-left">
+        <div className="flex items-start gap-3 justify-center sm:justify-start">
+          <CheckCircle2 className="w-5 h-5 text-slate-700 shrink-0 mt-0.5" />
+          <div>
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Independent Testing</h4>
+            <p className="text-xs text-slate-500 mt-0.5">All products are selected based on real utility and verified customer ratings.</p>
+          </div>
+        </div>
+        <div className="flex items-start gap-3 justify-center sm:justify-start">
+          <ShieldCheck className="w-5 h-5 text-slate-700 shrink-0 mt-0.5" />
+          <div>
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Secure Amazon Checkout</h4>
+            <p className="text-xs text-slate-500 mt-0.5">Orders and payments are processed directly by Amazon with standard return policies.</p>
+          </div>
+        </div>
+        <div className="flex items-start gap-3 justify-center sm:justify-start">
+          <Sparkles className="w-5 h-5 text-slate-700 shrink-0 mt-0.5" />
+          <div>
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Updated Daily</h4>
+            <p className="text-xs text-slate-500 mt-0.5">Pricing and Prime delivery status are refreshed continuously.</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
