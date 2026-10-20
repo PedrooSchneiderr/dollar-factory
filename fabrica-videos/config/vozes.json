@@ -1,0 +1,11 @@
+{
+  "default": "en-US-AvaMultilingualNeural",
+  "niches": {
+    "Home & Cleaning": "en-US-AvaMultilingualNeural",
+    "Kitchen Hacks": "en-US-AriaNeural",
+    "Pet Must-Haves": "en-US-EmmaMultilingualNeural",
+    "Car & Everyday": "en-US-AndrewMultilingualNeural"
+  },
+  "rate": "+8%",
+  "pitch": "+0Hz"
+}
