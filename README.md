@@ -91,20 +91,25 @@ flowchart TD
 
 ## 🏆 Catálogo de Produtos Campeões (Aprovados)
 
-Estes 10 produtos passaram pelo funil de 20 pontos de impulso e apelo visual:
+Estes 10 produtos passaram pelo funil de 20 pontos de impulso e apelo visual.
+
+> [!NOTE]
+> **Catálogo reconstruído (20/10/2026):** o catálogo anterior tinha ASINs inexistentes ou que apontavam para outros produtos, e imagens genéricas do Unsplash. Agora cada item abaixo foi **conferido na página real da Amazon US** (ASIN, título, preço, nota, reviews e imagens). Preços e reviews mudam, então reconfira antes de postar.
+>
+> Pendências antes de publicar: pedir aprovação no Amazon Associates e revisar o uso das imagens da Amazon pelos termos do programa.
 
 | Código | Produto | Nicho | Preço US$ | Avaliações | Status do Vídeo |
 | :---: | :--- | :--- | :---: | :---: | :---: |
-| **`#01`** | **Electric Spin Scrubber** | Home & Cleaning | \$34.99 | 14.8k (4.7⭐) | ✅ Piloto Pronto |
-| **`#02`** | **Reusable Pet Hair Roller** | Pet Must-Haves | \$24.95 | 168.4k (4.8⭐) | ✅ Piloto Pronto |
-| **`#03`** | **14-in-1 Veggie Chopper** | Kitchen Hacks | \$26.99 | 92.3k (4.6⭐) | ⏳ Em Renderização |
-| **`#04`** | **2-in-1 Air Fryer Oil Mister** | Kitchen Hacks | \$15.99 | 31.4k (4.8⭐) | ⏳ Backlog |
-| **`#05`** | **Pull-Out Under Sink Rack** | Home & Cleaning | \$28.99 | 48.9k (4.7⭐) | ⏳ Backlog |
-| **`#06`** | **Car Vent Cleaning Gel** | Car & Everyday | \$14.99 | 76.2k (4.5⭐) | ⏳ Backlog |
-| **`#07`** | **Rotary Cheese Grater** | Kitchen Hacks | \$25.99 | 53.1k (4.7⭐) | ⏳ Backlog |
-| **`#08`** | **Magnetic Motion Cabinet Lights** | Home & Cleaning | \$29.99 | 39.5k (4.6⭐) | ⏳ Backlog |
-| **`#09`** | **Electric Sweater Defuzzer** | Home & Cleaning | \$19.99 | 112.0k (4.7⭐) | ⏳ Backlog |
-| **`#10`** | **Muddy Dog Paw Washer** | Pet Must-Haves | \$16.99 | 64.3k (4.6⭐) | ⏳ Backlog |
+| **`#01`** | **Electric Spin Scrubber** (B0B7RSV894) | Home & Cleaning | \$35.99 | 13.6k (4.3⭐) | ⏳ A gerar |
+| **`#02`** | **ChomChom Pet Hair Roller** (B00BAGTNAQ) | Pet Must-Haves | \$24.99 | 206k (4.5⭐) | ⚠️ Piloto antigo, regerar |
+| **`#03`** | **Fullstar Veggie Chopper** (B0764HS4SL) | Kitchen Hacks | \$24.99 | 122k (4.5⭐) | ⏳ A gerar |
+| **`#04`** | **Mini Chip Bag Sealer** (B0C2TD5SKJ) | Kitchen Hacks | \$9.99 | 3.8k (3.8⭐) | ⏳ A gerar |
+| **`#05`** | **Touchless Soap Dispenser** (B078XDFDPY) | Home & Cleaning | \$27.99 | 39k (4.3⭐) | ⏳ A gerar |
+| **`#06`** | **Car Vent Cleaning Gel** (B081T7N948) | Car & Everyday | \$7.99 | 101k (4.1⭐) | ⏳ A gerar |
+| **`#07`** | **Dog Bath Shampoo Brush** (B01FE3IIC4) | Pet Must-Haves | \$11.99 | 25k (4.5⭐) | ⏳ A gerar |
+| **`#08`** | **Cordless Car Vacuum** (B07KG2X2GZ) | Car & Everyday | \$24.99 | 49k (4.3⭐) | ⏳ A gerar |
+| **`#09`** | **Sweater Fuzz Remover** (B008I25368) | Home & Cleaning | \$8.99 | 95k (4.4⭐) | ⏳ A gerar |
+| **`#10`** | **Dog Lick Mat** (B0BBTS457S) | Pet Must-Haves | \$7.99 | 3.8k (4.4⭐) | ⏳ A gerar |
 
 ---
 

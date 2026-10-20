@@ -2,8 +2,10 @@
 """
 4_transcrever_whisper.py
 Gera o arquivo de legendas dinâmicas estilo CapCut/TikTok (`.ass` Advanced SubStation Alpha)
-com sincronização precisa de tempo baseada na duração real de `narracao.mp3`,
-além do banner fixo superior com o código do produto (`AMAZON FIND #01`) e preço.
+com sincronização precisa de tempo baseada na duração real de `narracao.mp3`.
+Adapta o design das legendas de acordo com a persona:
+  - rick: Neon Portal Green (&H0039FF14&), estética Rick & Morty / Dimensão C-137.
+  - standard: Cyber Cyan (&H0000E5FF&), estilo e-commerce moderno.
 """
 import argparse
 import json
@@ -47,9 +49,15 @@ def generate_ass_subtitles(product_id: str, version: str = "v1") -> Path:
     mp3_path = work_dir / "narracao.mp3"
     duration = get_audio_duration(mp3_path)
 
+    persona = roteiro.get("persona", "rick")
     full_text = roteiro["full_narration"]
     chunks = split_into_chunks(full_text, words_per_chunk=3)
     total_words = sum(len(c.split()) for c in chunks)
+
+    is_rick = persona == "rick"
+    highlight_color = r"\c&H0039FF14&" if is_rick else r"\c&H0000E5FF&"
+    capcut_primary = "&H0039FF14" if is_rick else "&H0000E5FF"
+    top_badge_text = roteiro.get("top_banner") or (f"DIMENSION C-137 // FIND {roteiro['code']}" if is_rick else f"AMAZON US FIND {roteiro['code']}")
 
     ass_header = f"""[Script Info]
 ScriptType: v4.00+
@@ -60,10 +68,10 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: TopBadge,Arial Black,52,&H00FFFFFF,&H000000FF,&H00111827,&HCC111827,-1,0,0,0,100,100,1,0,3,18,0,8,40,40,140,1
-Style: PricePill,Arial Black,46,&H0000FF99,&H000000FF,&H00000000,&HAA000000,-1,0,0,0,100,100,1,0,1,4,2,8,40,40,235,1
-Style: CapCutPop,Arial Black,78,&H0000E5FF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,1,0,1,7,4,2,70,70,480,1
-Style: BottomCTA,Arial Black,48,&H00FFFFFF,&H000000FF,&H000055FF,&HCC0055FF,-1,0,0,0,100,100,1,0,3,16,0,2,50,50,220,1
+Style: TopBadge,Arial Black,50,&H00FFFFFF,&H000000FF,&H00111827,&HCC111827,-1,0,0,0,100,100,1,0,3,18,0,8,40,40,140,1
+Style: PricePill,Arial Black,46,{capcut_primary},&H000000FF,&H00000000,&HAA000000,-1,0,0,0,100,100,1,0,1,4,2,8,40,40,235,1
+Style: CapCutPop,Arial Black,78,{capcut_primary},&H00FFFFFF,&H00000000,&H90000000,-1,0,0,0,100,100,1,0,1,7,4,2,70,70,480,1
+Style: BottomCTA,Arial Black,48,&H00FFFFFF,&H000000FF,&H00004400,&HCC003300,-1,0,0,0,100,100,1,0,3,16,0,2,50,50,220,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -71,10 +79,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     end_str = format_ass_time(duration + 0.4)
     code = roteiro["code"]
     short_title = roteiro["short_title"].upper()
-    price = roteiro["price"]
+    price = float(roteiro["price"])
 
     events = [
-        f"Dialogue: 2,0:00:00.00,{end_str},TopBadge,,0,0,0,,AMAZON US FIND {code}",
+        f"Dialogue: 2,0:00:00.00,{end_str},TopBadge,,0,0,0,,{top_badge_text}",
         f"Dialogue: 2,0:00:00.00,{end_str},PricePill,,0,0,0,,{short_title} - ${price:.2f} PRIME",
         f"Dialogue: 2,0:00:00.00,{end_str},BottomCTA,,0,0,0,,LINK IN BIO -> SEARCH CODE {code}",
     ]
@@ -90,13 +98,13 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
         words = chunk.split()
         if len(words) >= 2:
-            words[-1] = r"{\c&H00FFFFFF&}" + words[-1] + r"{\c&H0000E5FF&}"
+            words[-1] = r"{\c&H00FFFFFF&}" + words[-1] + r"{" + highlight_color + r"}"
         styled_chunk = r"{\fscx110\fscy110\t(0,90,\fscx100\fscy100)}" + " ".join(words)
         events.append(f"Dialogue: 3,{start_t},{end_t},CapCutPop,,0,0,0,,{styled_chunk}")
 
     ass_path = work_dir / "legendas.ass"
     ass_path.write_text(ass_header + "\n".join(events) + "\n", encoding="utf-8")
-    print(f"[4/5 Legendas] Arquivo ASS estilo CapCut salvo em: {ass_path} ({len(chunks)} blocos)")
+    print(f"[4/5 Legendas] Persona [{persona.upper()}]: Salvo em: {ass_path} ({len(chunks)} blocos)")
     return ass_path
 
 

@@ -21,6 +21,12 @@
   - Geração bem-sucedida dos primeiros vídeos piloto em vertical 1080x1920:
     - `output/2026-10-19_produto_01_v1.mp4` (*Electric Spin Scrubber*)
     - `output/2026-10-19_produto_02_v1.mp4` (*Reusable Pet Hair Roller*)
+- [x] **Evolução da Fábrica de Vídeos ("Pro 2.0" Rick Sanchez):**
+  - Integração da persona **Rick Sanchez** (`1_gerar_roteiro.py`) com 3 variações de roteiro sarcástico/viral ridicularizando tarefas primitivas da Terra.
+  - Calibração de voz neural ágil com pitch/rate customizados em `vozes.json` e corte automático de silêncio (`silenceremove` em `2_gerar_narracao.py`).
+  - Legendas no estilo **Neon Portal Green** em `4_transcrever_whisper.py` (`#39FF14`).
+  - Overlay animado do avatar recortado (`assets/rick/rick_portal.png`) flutuando no canto da tela no `5_montar_video.py`.
+  - Orquestrador atualizado com suporte a `--persona rick` em `run_pipeline.py`.
 - [x] **Vitrine Storefront Next.js (`vitrine/`):**
   - Estrutura completa em Next.js 15 + Tailwind CSS v4.
   - Barra de busca instantânea por código do vídeo (`#01` a `#10`).
@@ -29,6 +35,13 @@
   - Botão de saída com tracking de cliques (`OutboundButton.tsx` + `/api/click`).
   - Rodapé obrigatório de conformidade FTC & Amazon Associates.
   - Build de produção (`next build`) testado e validado sem erros (15/15 páginas estáticas geradas).
+- [x] **Versionamento & GitHub:**
+  - Repositório publicado em `https://github.com/PedrooSchneiderr/dollar-factory`.
+  - README.md profissional com badges, diagrama de arquitetura e tabela de produtos campeões.
+- [x] **Auditoria e Reconstrução do Catálogo (20/10/2026):**
+  - Conferidas as ASINs do catálogo antigo direto na Amazon US: só o `#02` era válido (5 retornavam 404 e 4 apontavam para outros produtos).
+  - `fabrica-videos/config/produtos.json` reescrito com 10 produtos reais (ASIN, título, preço, nota, reviews e imagens da própria Amazon).
+  - Limitações: `old_price` foi igualado a `price` (não verifiquei preço de lista); o `next build` da vitrine não foi rodado; os vídeos antigos `#01` e `#02` usavam dados desatualizados.
 - [x] **Documentação & Guias Operacionais:**
   - Guia em `contas/guia_operacional_us.md` para abertura de conta ACH (Wise/Payoneer), formulário fiscal W-8BEN e aquecimento de contas US.
 
@@ -36,10 +49,8 @@
 
 ## 🟡 Em Andamento (In Progress)
 
-- [ ] **Evolução do Módulo de Vídeo ("Pro 2.0" com Personagens):**
-  - Integração da persona e voz do **Rick Sanchez** para roteiros irreverentes no formato *Character Review*.
-  - Adição do avatar recortado (`assets/rick/rick_portal.png`) sobreposto no canto da tela com animação de pulso.
-  - Sound design: corte de pausas mortas (`silenceremove`), efeitos de transição (*whoosh*) e som de caixa registradora (*ding*).
+- [ ] **Geração do Lote de Vídeos Pro 2.0 (Produtos #01 ao #10 com Persona Rick Sanchez):**
+  - Executar a esteira Pro 2.0 para gerar as versões v1 e v2 para todos os produtos aprovados.
 
 ---
 
