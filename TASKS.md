@@ -64,12 +64,19 @@
   - **Build da Vitrine:** Validado com sucesso em Next.js 15 (15/15 páginas estáticas).
   - *Limitações Reais:* A voz do cientista usa temporariamente Edge-TTS calibrado (`en-US-GuyNeural`, +15% rate, -2Hz pitch) com sound design; a inferência via modelo RVC específico requer o fornecimento do arquivo `.pth` de voz autoral do usuário.
 
+- [x] **Geração do Lote Completo de Vídeos Pro 3.0 (#01 ao #10 com Persona Cientista Autoral) (20/10/2026):**
+  - Gerados todos os 10 vídeos verticais (1080x1920) com a esteira Pro 3.0.
+  - Cada vídeo conta com gancho nos primeiros 3s, cortes rápidos de 1.8s com fundo desfocado, legendas palavra por palavra com faster-whisper, boca reativa e sound design FFmpeg.
+  - Todos os 10 arquivos `.mp4` foram sincronizados com `vitrine/public/videos/` (`produto_01.mp4` a `produto_10.mp4`).
+  - Build de produção Next.js 15 validado (15/15 páginas estáticas geradas com sucesso).
+
 ---
 
 ## 🟡 Em Andamento (In Progress)
 
-- [ ] **Geração do Lote de Vídeos Pro 3.0 (Produtos #01 ao #10 com Persona Cientista Autoral):**
-  - Executar a nova esteira para todos os 10 produtos aprovados do catálogo.
+- [ ] **Deploy da Vitrine na Vercel & Conexão de Domínio:**
+  - Importar o repositório na Vercel com build Next.js pré-configurado.
+  - Obter URL pública para inclusão na bio das redes sociais e inscrição no Amazon Associates.
 
 ---
 
