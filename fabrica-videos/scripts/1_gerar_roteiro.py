@@ -14,7 +14,7 @@ import urllib.request
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-CONFIG_PRODUTOS = BASE_DIR / "config" / "produtos.json"
+CONFIG_PRODUTOS = BASE_DIR.parent / "vitrine" / "src" / "data" / "produtos.json"  # fonte única do catálogo
 WORK_DIR = BASE_DIR / "output" / "work"
 
 

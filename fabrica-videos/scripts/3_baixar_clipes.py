@@ -14,7 +14,7 @@ import urllib.request
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-CONFIG_PRODUTOS = BASE_DIR / "config" / "produtos.json"
+CONFIG_PRODUTOS = BASE_DIR.parent / "vitrine" / "src" / "data" / "produtos.json"  # fonte única do catálogo
 RAW_CLIPS_DIR = BASE_DIR / "assets" / "clipes_brutos"
 WORK_DIR = BASE_DIR / "output" / "work"
 
@@ -32,7 +32,9 @@ def download_image(url: str, dest: Path) -> bool:
 
 def prepare_clips(product_id: str, version: str = "v1") -> list[Path]:
     products = json.loads(CONFIG_PRODUTOS.read_text(encoding="utf-8"))
-    product = next(p for p in products if p["id"] == product_id)
+    product = next((p for p in products if p["id"] == product_id), None)
+    if product is None:
+        raise ValueError(f"Produto '{product_id}' não encontrado em {CONFIG_PRODUTOS}")
 
     work_dir = WORK_DIR / f"produto_{product_id}_{version}"
     clips_dir = work_dir / "clips"

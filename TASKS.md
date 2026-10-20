@@ -41,7 +41,13 @@
 - [x] **Auditoria e Reconstrução do Catálogo (20/10/2026):**
   - Conferidas as ASINs do catálogo antigo direto na Amazon US: só o `#02` era válido (5 retornavam 404 e 4 apontavam para outros produtos).
   - `fabrica-videos/config/produtos.json` reescrito com 10 produtos reais (ASIN, título, preço, nota, reviews e imagens da própria Amazon).
-  - Limitações: `old_price` foi igualado a `price` (não verifiquei preço de lista); o `next build` da vitrine não foi rodado; os vídeos antigos `#01` e `#02` usavam dados desatualizados.
+  - Limitações: `old_price` foi igualado a `price` (não verifiquei preço de lista); os vídeos antigos `#01` e `#02` usavam dados desatualizados.
+- [x] **Correções pós-análise externa (`ANALISE_EXTERNA.md`):**
+  - `vitrine/src/data/produtos.json` sincronizado com o catálogo verificado (antes ainda tinha ASINs falsas e fotos do Unsplash).
+  - `next.config.mjs` liberou `m.media-amazon.com` para as imagens.
+  - `/api/click` agora só grava arquivo fora da Vercel e usa `console.log` em produção.
+  - Fonte única do catálogo: `fabrica-videos/scripts/1_gerar_roteiro.py` e `3_baixar_clipes.py` agora leem `vitrine/src/data/produtos.json`. O arquivo `fabrica-videos/config/produtos.json` ficou obsoleto e deve ser removido com `git rm`.
+  - Pendente: rodar `npm run build`; corrigir `4_transcrever_whisper.py` (não transcreve de verdade).
 - [x] **Documentação & Guias Operacionais:**
   - Guia em `contas/guia_operacional_us.md` para abertura de conta ACH (Wise/Payoneer), formulário fiscal W-8BEN e aquecimento de contas US.
 
