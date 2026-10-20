@@ -21,7 +21,7 @@ WORK_DIR = BASE_DIR / "output" / "work"
 def build_rick_scripts(product: dict) -> list[dict]:
     code = product["code"]
     short = product["short_title"]
-    price = int(float(product["price"]))
+    price = round(float(product["price"]))
     pain = product["pain_point"]
     solution = product["solution_summary"]
     benefits = product.get("benefits", [])
@@ -92,7 +92,7 @@ def build_rick_scripts(product: dict) -> list[dict]:
 def build_standard_scripts(product: dict) -> list[dict]:
     code = product["code"]
     short = product["short_title"]
-    price = int(float(product["price"]))
+    price = round(float(product["price"]))
     pain = product["pain_point"]
     hook_custom = product["visual_hook"]
     solution = product["solution_summary"]
